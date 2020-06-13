@@ -15,7 +15,7 @@ const int NUMC = 100;
 int numOfInitialChips = 0;
 int numChipsTaken = 0;
 int MaxChipSelection = 0;
-int numChipsLeft = 0 ;
+int numChipsLeft = 2 ;
 
 string playerName[2] ;
 cout << "Welcome player one , what is your name? " << endl;
@@ -43,13 +43,14 @@ cin >> numChipsTaken ;
 
  cout << endl ;
   if(numChipsTaken > MaxChipSelection){
-    cout<< "Select a number less than "<< MaxChipSelection << endl;
+    cout<< "Select a number equal or less than "<< MaxChipSelection << endl;
   }
-}while (numChipsTaken > MaxChipSelection);  
+}while ((numChipsTaken > MaxChipSelection)&&( numChipsLeft>1 ));  
 
 
 numChipsLeft = numOfInitialChips - numChipsTaken;
 MaxChipSelection = floor(numChipsLeft* 0.5);
+if(MaxChipSelection ==0){ MaxChipSelection=MaxChipSelection+1 ;}
 cout << "now we have " << numChipsLeft << " chips in the pot" << endl; 
   numOfInitialChips = numChipsLeft ;
   player1turn =! player1turn;
