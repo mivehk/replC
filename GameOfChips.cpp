@@ -11,7 +11,7 @@ bool gameOver =false ;
 bool player1turn = true;  
 
 srand(time(0));
-const int numc = 100;
+const int NUMC = 100;
 int numOfInitialChips = 0;
 int numChipsTaken = 0;
 int MaxChipSelection = 0;
@@ -25,7 +25,7 @@ cin >> playerName[1];
 
 
 
-numOfInitialChips = static_cast<int>(rand()%numc)+1 ;
+numOfInitialChips = static_cast<int>(rand()%NUMC)+1 ;
 cout << "Game of chips , starting with "<< numOfInitialChips << endl;
 
 MaxChipSelection = floor(numOfInitialChips* 0.5);
