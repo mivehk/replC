@@ -19,7 +19,7 @@ int main() {
   cout.setf(ios::showpoint);
   cout.precision(2);
 
-  cout << "Hello customer, our interest rate is %" << shInterestRate <<" which is compounded " << compound <<" times over the course of year\n" ;
+  cout << "Hello customer, our interest rate is %" << shInterestRate <<" which is compounded " << compound <<" times annually. \n" ;
   cout << "Now ,How much money you are interested in investing? \n (enter whole number like $10 or with two decimal points like $10.00) \n $";
   cin >> principal ;
   finalBalance = principal*(pow((1 + interestRate/compound),(compound*times )));
