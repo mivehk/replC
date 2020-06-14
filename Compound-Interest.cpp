@@ -7,7 +7,7 @@ using namespace std;
 //using namespace ios;
 
 int main() {
-  double finalBalance = 0;
+  float finalBalance = 0;
   float principal = 0;
   int shInterestRate = 6;
   float interestRate = (float)shInterestRate / 100;
@@ -20,7 +20,7 @@ int main() {
   cout.precision(2);
 
   cout << "Hello customer, our interest rate is %" << shInterestRate <<" which is compounded " << compound <<" times over the course of year\n" ;
-  cout << "Now ,How much money you are interested in investing? \n";
+  cout << "Now ,How much money you are interested in investing? \n (enter whole number like $10 or with two decimal points like $10.00) \n $";
   cin >> principal ;
   finalBalance = principal*(pow((1 + interestRate/compound),(compound*times )));
   cout << "Your final balance in one year would be $"<< finalBalance << endl;
