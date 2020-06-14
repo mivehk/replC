@@ -43,7 +43,8 @@ cin >> numChipsTaken ;
 
  cout << endl ;
   if(numChipsTaken > MaxChipSelection){
-    cout<< "Select a number equal or less than "<< MaxChipSelection << endl;
+    cout<< "Try again and select a number equal or less than "<< MaxChipSelection << endl;
+    cout << endl;
   }
 }while ((numChipsTaken > MaxChipSelection)&&( numChipsLeft>1 ));  
 
@@ -53,11 +54,24 @@ MaxChipSelection = floor(numChipsLeft* 0.5);
 if(MaxChipSelection ==0){ MaxChipSelection=MaxChipSelection+1 ;}
 cout << "now we have " << numChipsLeft << " chips in the pot" << endl; 
   numOfInitialChips = numChipsLeft ;
-  player1turn =! player1turn;
+ 
 
+if (numChipsLeft ==0) 
+{
+  if(player1turn){
+     cout << "Game is over! Congradulation " << playerName[1] <<" You Won!";
+  }else{
+     cout << "Game is over! Congradulation " << playerName[0] << " You won!";
+  }
+ 
+}
+
+ player1turn =! player1turn;
 } 
 while(
   numChipsLeft > 0
   );
+cout << endl;
 
+return 0;
 }
