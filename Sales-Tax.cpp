@@ -1,11 +1,14 @@
+//This program calcualtes your total price after tax
+// if you have resale certificate then you can use wholesale 
+
 #include <iostream>
 
 using namespace std;
 
 int main(){
   const float TAX_RATE = 0.08;
-  int number =0 ;
-  float price ,total ;
+  int number=0 ;
+  float price ,total  ;
   char choice ;
   
 
@@ -18,8 +21,9 @@ int main(){
   cout << " Enter price for that item: $";
   cin >> price ;
 
-  cout << " if you want wholesale price then press 'w' \n";
-  cout << " if you want retail price then press 'r' \n";
+  cout << " Press W , if you want wholesale price \n";
+  cout << " Press R , if you want retail price  \n";
+  cout << " Then press enter \n";
   cin >> choice;
 
   if ((choice == 'w') || (choice == 'W')){
@@ -30,6 +34,9 @@ int main(){
     float subtotal =0.0;
     subtotal = price * number;
     total = subtotal + subtotal * TAX_RATE;
+    int resale ;
+    cout << " Enter your resale number: ";
+    cin >> resale ;
     cout << " You need to pay total of $" << total << endl;
   }
 
