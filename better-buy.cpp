@@ -9,18 +9,20 @@ double dollar_per_sqrinch( double lenght_par , double width_par , double price_p
 
 int main(){
     using namespace std;
+    
     cout.setf(ios::fixed);
     cout.setf(ios::showpoint);
     cout.precision(2);
+    
     double size , cost ,length , width ;
     int count =0;
     int number = 1;
 
-        //cout << " Skip the name and tell me how many pizza you have in your menu? ";
-        //cin >> number;
+//cout << " Skip the name and tell me how many pizza you have in your menu? ";
+//cin >> number;
         char shape ;
 
-      //for ( int count=1 ; count<=number ; count++ ){
+//for ( int count=1 ; count<=number ; count++ ){
 
         cout << "Select shape of pizza you sell: \n"
              << "   for square enter S \n" 
@@ -38,7 +40,7 @@ int main(){
         cout << "This choice asks for " << better_buy << " of dollar per square inch \n";
         }     
          else if ( (shape == 's') || (shape =='S') ){
-            cout << " Enter lenght and width of pizza with space between them like '16 10'";
+            cout << " Enter lenght and width of pizza with space between them like '16 10': ";
             cin >> length >> width ;
             cout << "Enter price $";
             cin >> cost;
