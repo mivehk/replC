@@ -4,6 +4,7 @@
 using namespace std;
 
 double average(ifstream& in_st_par);
+void initialize(ofstream& out_st_par);
 
 int main(){
 
@@ -34,12 +35,16 @@ if (out_str.fail()){
     exit(1);
 }
 
+out_str.setf(ios::showpoint);
+out_str.precision(3);
+
 double avg;
 
 //sum = first + second + third + forth + fifth ;
 
 avg = average(in_str) ;
 out_str << avg;
+initialize(out_str);
 cout << avg << endl;
 
 
@@ -62,4 +67,10 @@ double average(ifstream& in_st_par){
     }
     
     return(sum/count);
+}
+
+void initialize(ofstream& out_st_par){
+    using namespace std;
+    out_st_par << endl;
+    return;
 }
