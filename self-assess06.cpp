@@ -34,7 +34,11 @@ int main(){
     while(( ans !='Y' ) && ( ans !='y' ));
     cout <<" Now tell me the name of output file with max 15 characters: ";
     cin>>out_file ;
+<<<<<<< HEAD
     in_str.open("input06.txt");
+=======
+    in_str.open("input06.txt" ,ios::app);
+>>>>>>> d73a156ca86bf2fb9976c9c94e390fa9d5695043
     if (in_str.fail()){
         cout << " Error occurred while reading infile stream";
         exit(1);
