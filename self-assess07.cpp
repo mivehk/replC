@@ -80,7 +80,7 @@ for ( int i=0 ; i < num_emp ; i++){
     cin >> vac_days[i] ;
      int o = revise_vac(vac_days[i]);
 
-    cout << "revised number is: ºπºπ/*" << o << endl;
+    cout << "revised number is: " << o << endl;
 }
 
     return 0;
@@ -96,11 +96,15 @@ int revise_vac ( int num_par){
 using namespace std;
 
 void fill_up( int a[] , int num_scores_par);
+void throw_out( const int a[], int num_par);
 
 int main(){
-    int number =5;
+    int number =5 ; //, num =10;
     int score[number];
+    //int virtue[num];
     fill_up( score , number);
+    //fill_up ( virtue , num);
+    throw_out(score , number);
     
     return 0;
 }
@@ -112,4 +116,10 @@ void fill_up(int a[],int num_scores_par){
     cin >> a[i];
     num_scores_par--;
     cout << "the last array index used is " << num_scores_par << endl;
+    
+}
+void throw_out(const int a[] , int num_par){
+    cout << "You entered these numbers : \n";
+    for (int j=0 ; j<num_par ;j++)
+     cout << a[j] << " " << endl;
 }
