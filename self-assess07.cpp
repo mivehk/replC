@@ -197,28 +197,51 @@ for(int i=0 ; i<num ; i++){
 */
 
 #include <iostream>
+#include <cctype>
 using namespace std;
 void fill_array(int a[], int size_par , int& num_filled_par);
 double calc_avg( int a[], int num_filled_par);
 void show_diff(int a[], int num_filled_par);
+int search(int a[], int num_filled_par , int quoi);
+void skip_it();
 
 int main(){
 
 
 int  max_size ,num_size;
 
-cout << " Tell me maximum notebook page ";
+cout << " Tell me how many vineyards you visited: ";
 cin >> max_size;
 
-int notebooks[max_size];
+int vineyards[max_size];
 
 /*int num_size;
 cout << " Tell me how many pages you want to use of " << max_size << endl;
 cin>> num_size;
 */
 
-fill_array(notebooks, max_size ,num_size);
-show_diff( notebooks,num_size);
+fill_array(vineyards, max_size ,num_size);
+show_diff( vineyards,num_size);
+
+   char conf;
+do {
+    int quand;
+    cout << " Now tell me which purchase you want to double check? ";
+    cin >> quand;
+    int t ;
+    t = search( vineyards , num_size , quand);
+    if (t == -1){
+        cout << " We could not find this purchase in vineyards list , try again";
+    } else {
+        cout << " Your search for "<< quand <<" bottles was from vineyards# " << t <<endl;
+    }
+    cout << " Do you want to search for another purchase? (Yes/no): ";
+     cin >> conf;
+     skip_it();
+} 
+while (
+    (conf !='n')&&(conf !='N')
+);
 
     return 0;
 }
@@ -229,10 +252,14 @@ void fill_array(int a[], int size_par , int& num_filled_par){
         } */
 
         int next , i=0;
+        cout << " Give me total bottles purchased from each Vineyard \n" 
+        << " ending your list with negative number when asked about vineyard number " << (size_par+1) << endl;
+        cout << "Now tell me how many bottles from vineyards " << i+1 << " : " ;
         cin >> next;
         while ((next >=0)&&(num_filled_par < size_par)){
             a[i]=next;
             i++;
+            cout << "Now for Vineyard " << i+1 << " : " ;
             cin >> next;
         }
         num_filled_par = i;
@@ -256,7 +283,26 @@ void show_diff(int a[], int num_filled_par){
      double average_is = 0.0 ;
      average_is= calc_avg( a , num_filled_par);
     for ( int i=0 ; i<num_filled_par ; i++){
-        cout << " difference from element number " << i+1 <<"which was"<< a[i]<< " to average is "
+        cout << " difference from vineyards number " << i+1 <<" purchased bottles of "<< a[i]<< " to average "<< average_is<< " is "
         << (a[i] - average_is) << endl ;
     }
+}
+
+int search(int a[], int num_filled_par , int quoi){
+    bool found =false;
+    int i=0 ;
+    while((!found)&&(i<num_filled_par)){
+        if (quoi == a[i]){
+            return i+1;
+        }
+        i++;
+    } return -1;
+}
+
+void skip_it(){
+    char symbol;
+    do { cin.get(symbol);} 
+    while(
+        (! isspace(symbol))
+    );
 }
