@@ -307,47 +307,164 @@ for(int i=0 ; i<num ; i++){
 //     );
 // }
 
+// #include <iostream>
+// #include <cctype>
+// using namespace std;
+
+
+// void create_array(int a[] , int size_par , int& used_size_par);
+// double calc_avg(int a[] , int used_size_par);
+// void show_diff(int a[] , int used_size_par);
+// int search(int a[], int search_par , int used_size_par);
+// void skip_it();
+
+// int main(){
+//    int max_classes;
+//    cout << "How many classes you took this semester? ";
+//    cin >> max_classes;
+
+//    int used_size;
+//    int classes[max_classes];
+
+//    create_array( classes, max_classes,used_size );
+//    show_diff(classes , used_size);
+//    char sym;
+//    int grade;
+//    do{
+//        cout << " tell me the grade which you are searching for :";
+//        cin >> grade;
+//        int t = search( classes , grade , used_size);
+//        if ( t == -1){
+//            cout << " couldn't find your grade" <<endl;
+//        }else{
+//            cout << " we found your grade " << grade << " at position " << t+1<<endl;
+//        }
+//        cout << " do you want to run another search? (Yes/No) ";
+//        cin >> sym;
+//        skip_it();
+//    }while(
+//            (sym !='n')&&( sym !='N')
+//            );
+
+
+//     return 0;
+// }
+
+// void create_array(int a[] , int size_par , int& used_size_par){
+//     int next , index =0;
+//     cout<< " Grade entry for each course until "<< size_par+1 << " with negative number \n";
+//     cout << " Now enter your grade for course #" << index+1 <<" : ";
+//     cin >> next ;
+//     do {
+//         a[index]=next;
+//         index++;
+//         cout << " Now time to enter your course #" << index+1 << " : ";
+//         cin >> next;
+//     }while(
+//             ((used_size_par<size_par)&&(next>0))
+//             );
+//     used_size_par = index ;
+// }
+// double calc_avg(int a[] , int used_size_par){
+//     double avg =0.0;
+//     int total=0 ;
+//     for (int i=0 ; i<used_size_par ; i++){
+//         total = total + a[i];
+//     }
+//     return total/(used_size_par+1);
+
+// }
+// void show_diff(int a[] , int used_size_par){
+//     double avg = calc_avg(a , used_size_par);
+//     for (int i=0 ; i<used_size_par ; i++){
+//         cout << a[i] << " is your grade #" << i+1<< " and it differ "<<a[i]-avg<< " from average grade of "<<avg << endl;
+//     }
+
+// }
+// int search(int a[], int search_par , int used_size_par){
+//     //bool found =false;
+//     for (int i=0 ; i < used_size_par ; i++){
+//             if (a[i] == search_par){
+//             return i;
+//             }
+//     }
+//     return -1;
+// }
+
+// void skip_it(){
+//     char symbol;
+//     do {cin.get(symbol);}
+//     while(! isspace(symbol));
+// }
+
 #include <iostream>
 #include <cctype>
 using namespace std;
 
-
+int find_min_index(const int a[] , int start_index_par ,int used_size_par);
+void swap( int& first_par , int& second_par);
 void create_array(int a[] , int size_par , int& used_size_par);
-double calc_avg(int a[] , int used_size_par);
-void show_diff(int a[] , int used_size_par);
 int search(int a[], int search_par , int used_size_par);
 void skip_it();
+void sort( int a[] , int used_size_par);
 
 int main(){
-   int max_classes;
-   cout << "How many classes you took this semester? ";
-   cin >> max_classes;
+   int max_courses;
+   cout << " how many courses you took? ";
+   cin >> max_courses;
 
+   int classes[max_courses];
    int used_size;
-   int classes[max_classes];
+   create_array(classes , max_courses , used_size);
+   sort( classes ,used_size);
 
-   create_array( classes, max_classes,used_size );
-   show_diff(classes , used_size);
    char sym;
-   int grade;
-   do{
-       cout << " tell me the grade which you are searching for :";
-       cin >> grade;
-       int t = search( classes , grade , used_size);
-       if ( t == -1){
-           cout << " couldn't find your grade" <<endl;
-       }else{
-           cout << " we found your grade " << grade << " at position " << t+1<<endl;
-       }
-       cout << " do you want to run another search? (Yes/No) ";
-       cin >> sym;
-       skip_it();
-   }while(
-           (sym !='n')&&( sym !='N')
-           );
+    int grade;
+    do{
+        cout << " tell me the grade which you are searching for :";
+        cin >> grade;
+        int t = search( classes , grade , used_size);
+        if ( t == -1){
+            cout << " couldn't find your grade" <<endl;
+        }else{
+            cout << " we found your grade " << grade << " at position " << t+1<<endl;
+        }
+        cout << " do you want to run another search? (Yes/No) ";
+        cin >> sym;
+        skip_it();
+    }while(
+            (sym !='n')&&( sym !='N')
+            );
+
+
 
 
     return 0;
+}
+void sort( int a[] , int used_size_par){
+    for ( int i=0 ; i<used_size_par ; i++){
+        int t = find_min_index(a , i ,used_size_par);
+        swap(a[i],a[t]);
+    }
+}
+
+int find_min_index(const int a[] , int start_index_par ,int used_size_par){
+    int index_min , min;
+    index_min = start_index_par;
+    min = a[start_index_par];
+    for ( int i=start_index_par+1 ; i <used_size_par ; i++){
+        if (a[i] < min ){
+            index_min =i ;
+            min = a[i];
+        }
+    }
+    return index_min;
+}
+void swap( int& first_par , int& second_par){
+    int temp;
+     temp = first_par ;
+    first_par = second_par ;
+    second_par = temp ;
 }
 
 void create_array(int a[] , int size_par , int& used_size_par){
@@ -365,28 +482,13 @@ void create_array(int a[] , int size_par , int& used_size_par){
             );
     used_size_par = index ;
 }
-double calc_avg(int a[] , int used_size_par){
-    double avg =0.0;
-    int total=0 ;
-    for (int i=0 ; i<used_size_par ; i++){
-        total = total + a[i];
-    }
-    return total/(used_size_par+1);
 
-}
-void show_diff(int a[] , int used_size_par){
-    double avg = calc_avg(a , used_size_par);
-    for (int i=0 ; i<used_size_par ; i++){
-        cout << a[i] << " is your grade #" << i+1<< " and it differ "<<a[i]-avg<< " from average grade of "<<avg << endl;
-    }
-
-}
 int search(int a[], int search_par , int used_size_par){
     //bool found =false;
     for (int i=0 ; i < used_size_par ; i++){
-            if (a[i] == search_par){
+        if (a[i] == search_par){
             return i;
-            }
+        }
     }
     return -1;
 }
