@@ -397,104 +397,224 @@ for(int i=0 ; i<num ; i++){
 //     while(! isspace(symbol));
 // }
 
-#include <iostream>
-#include <cctype>
-using namespace std;
+// #include <iostream>
+// #include <cctype>
+// using namespace std;
 
-int find_min_index(const int a[] , int start_index_par ,int used_size_par);
-void swap( int& first_par , int& second_par);
-void create_array(int a[] , int size_par , int& used_size_par);
-int search(int a[], int search_par , int used_size_par);
-void skip_it();
-void sort( int a[] , int used_size_par);
+// int find_min_index(const int a[] , int start_index_par ,int used_size_par);
+// void swap( int& first_par , int& second_par);
+// void create_array(int a[] , int size_par , int& used_size_par);
+// int search(int a[], int search_par , int used_size_par);
+// void skip_it();
+// void sort( int a[] , int used_size_par);
+
+// int main(){
+//    int max_courses;
+//    cout << " how many courses you took? ";
+//    cin >> max_courses;
+
+//    int classes[max_courses];
+//    int used_size;
+//    create_array(classes , max_courses , used_size);
+//    sort( classes ,used_size);
+
+//    char sym;
+//     int grade;
+//     do{
+//         cout << " tell me the grade which you are searching for :";
+//         cin >> grade;
+//         int t = search( classes , grade , used_size);
+//         if ( t == -1){
+//             cout << " couldn't find your grade" <<endl;
+//         }else{
+//             cout << " we found your grade " << grade << " at position " << t+1<<endl;
+//         }
+//         cout << " do you want to run another search? (Yes/No) ";
+//         cin >> sym;
+//         skip_it();
+//     }while(
+//             (sym !='n')&&( sym !='N')
+//             );
+
+
+
+
+//     return 0;
+// }
+// void sort( int a[] , int used_size_par){
+//     for ( int i=0 ; i<used_size_par ; i++){
+//         int t = find_min_index(a , i ,used_size_par);
+//         swap(a[i],a[t]);
+//     }
+// }
+
+// int find_min_index(const int a[] , int start_index_par ,int used_size_par){
+//     int index_min , min;
+//     index_min = start_index_par;
+//     min = a[start_index_par];
+//     for ( int i=start_index_par+1 ; i <used_size_par ; i++){
+//         if (a[i] < min ){
+//             index_min =i ;
+//             min = a[i];
+//         }
+//     }
+//     return index_min;
+// }
+// void swap( int& first_par , int& second_par){
+//     int temp;
+//      temp = first_par ;
+//     first_par = second_par ;
+//     second_par = temp ;
+// }
+
+// void create_array(int a[] , int size_par , int& used_size_par){
+//     int next , index =0;
+//     cout<< " Grade entry for each course until "<< size_par+1 << " with negative number \n";
+//     cout << " Now enter your grade for course #" << index+1 <<" : ";
+//     cin >> next ;
+//     do {
+//         a[index]=next;
+//         index++;
+//         cout << " Now time to enter your course #" << index+1 << " : ";
+//         cin >> next;
+//     }while(
+//             ((used_size_par<size_par)&&(next>0))
+//             );
+//     used_size_par = index ;
+// }
+
+// int search(int a[], int search_par , int used_size_par){
+//     //bool found =false;
+//     for (int i=0 ; i < used_size_par ; i++){
+//         if (a[i] == search_par){
+//             return i;
+//         }
+//     }
+//     return -1;
+// }
+
+// void skip_it(){
+//     char symbol;
+//     do {cin.get(symbol);}
+//     while(! isspace(symbol));
+// }
+
+
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+const int NUM_COURSES =4;
+
+void create_student_array( string a[], int size_par, int& filled_par );
+void create_course_array( string a[], int size_par, int& filled_par );
+
+//void compute_std_avg(int num_students_par,int num_courses_par, int grades[][num_courses_par] ,double std_avg_par[]);
+void compute_std_avg( int num_students_par, int grades[][NUM_COURSES] ,double std_avg_par[]);
+
+void compute_grade_avg(int num_students_par,int grades[][NUM_COURSES], double grade_avg_par[]);
+//void compute_grade_avg(int num_students_par,int num_courses_par,int grades[][num_courses_par], double grade_avg_par[]);
+
+void display(int num_students_par,string students[num_students_par],string courses[NUM_COURSES], int grades[][NUM_COURSES],double std_avg_par[] , double grade_avg_par[]);
+//void display(string students[num_students_par],string courses[NUM_COURSES] ,int grades[][NUM_COURSES],double std_avg_par[] , double grade_avg_par[]);
+//void display(int num_students_par ,int num_courses_par ,string students[num_students_par],string courses[num_courses_par] ,int grades[][num_courses_par],double std_avg_par[] , double grade_avg_par[]);
+void create_grades( int num_students_par , int grades[][NUM_COURSES]);
 
 int main(){
-   int max_courses;
-   cout << " how many courses you took? ";
-   cin >> max_courses;
 
-   int classes[max_courses];
-   int used_size;
-   create_array(classes , max_courses , used_size);
-   sort( classes ,used_size);
+    int num_students , used_grd_size , used_std_size;
+    cout <<" how many students are in the class? ";
+    cin>> num_students;
+    string students[num_students];
+    //cout <<" how many courses are taught? ";
+    //cin >> num_courses;
+    string courses[NUM_COURSES];
+    create_student_array( students , num_students , used_std_size);
+    create_course_array( courses , NUM_COURSES , used_grd_size);
 
-   char sym;
-    int grade;
-    do{
-        cout << " tell me the grade which you are searching for :";
-        cin >> grade;
-        int t = search( classes , grade , used_size);
-        if ( t == -1){
-            cout << " couldn't find your grade" <<endl;
-        }else{
-            cout << " we found your grade " << grade << " at position " << t+1<<endl;
-        }
-        cout << " do you want to run another search? (Yes/No) ";
-        cin >> sym;
-        skip_it();
-    }while(
-            (sym !='n')&&( sym !='N')
-            );
+    int grades[num_students][NUM_COURSES];
+    create_grades(num_students, grades);
 
+    double std_avg[num_students];
+    double grade_avg[NUM_COURSES];
 
+    compute_std_avg(num_students, grades , std_avg);
+    compute_grade_avg(num_students, grades , grade_avg);
 
+    display( num_students , students,courses,grades ,std_avg , grade_avg);
 
     return 0;
 }
-void sort( int a[] , int used_size_par){
-    for ( int i=0 ; i<used_size_par ; i++){
-        int t = find_min_index(a , i ,used_size_par);
-        swap(a[i],a[t]);
+
+void create_student_array( string a[], int size_par, int& filled_par ){
+    for (int i=0; i< size_par; i++){
+        cout << "Add a student name : ";
+        cin>>a[i];
+        filled_par = i;
+    }
+}
+void create_course_array( string a[], int size_par, int& filled_par ){
+    for (int i=0; i< size_par; i++){
+        cout << "Add a course name : ";
+        cin>>a[i];
+        filled_par = i;
     }
 }
 
-int find_min_index(const int a[] , int start_index_par ,int used_size_par){
-    int index_min , min;
-    index_min = start_index_par;
-    min = a[start_index_par];
-    for ( int i=start_index_par+1 ; i <used_size_par ; i++){
-        if (a[i] < min ){
-            index_min =i ;
-            min = a[i];
+void create_grades( int num_students_par  , int grades[][NUM_COURSES]){
+    int grd;
+    for (int i=0 ; i < num_students_par ; i++){
+        for (int j=0 ; j < NUM_COURSES; j++){
+            cout << " enter grade for course " <<j << " of student " << i <<endl;
+            cin >> grd;
+            grades[i][j] = grd;
         }
     }
-    return index_min;
-}
-void swap( int& first_par , int& second_par){
-    int temp;
-     temp = first_par ;
-    first_par = second_par ;
-    second_par = temp ;
 }
 
-void create_array(int a[] , int size_par , int& used_size_par){
-    int next , index =0;
-    cout<< " Grade entry for each course until "<< size_par+1 << " with negative number \n";
-    cout << " Now enter your grade for course #" << index+1 <<" : ";
-    cin >> next ;
-    do {
-        a[index]=next;
-        index++;
-        cout << " Now time to enter your course #" << index+1 << " : ";
-        cin >> next;
-    }while(
-            ((used_size_par<size_par)&&(next>0))
-            );
-    used_size_par = index ;
-}
-
-int search(int a[], int search_par , int used_size_par){
-    //bool found =false;
-    for (int i=0 ; i < used_size_par ; i++){
-        if (a[i] == search_par){
-            return i;
+void compute_std_avg( int num_students_par, int grades[][NUM_COURSES] ,double std_avg_par[]){
+    for(int i=0; i<num_students_par ; i++){
+        double sum =0;
+        for (int j=0; j<NUM_COURSES; j++){
+            sum = sum + grades[i][j];
         }
+        std_avg_par[i]=sum /NUM_COURSES;
     }
-    return -1;
 }
 
-void skip_it(){
-    char symbol;
-    do {cin.get(symbol);}
-    while(! isspace(symbol));
+void compute_grade_avg(int num_students_par,int grades[][NUM_COURSES], double grade_avg_par[]){
+    for (int i=0 ; i<NUM_COURSES ; i++){
+        double sum=0;
+        for(int j=0; j<num_students_par; j++){
+            sum = sum + grades[i][j];
+        }
+        grade_avg_par[i] = sum / num_students_par;
+    }
+}
+
+void display(int num_students_par ,string students[num_students_par] , string courses[NUM_COURSES],int grades[][NUM_COURSES],double std_avg_par[] , double grade_avg_par[]) {
+    using namespace std;
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.precision(1);
+    cout << setw(10) << "Student";
+    for (int i = 0; i < NUM_COURSES; i++) {
+        cout << setw(15) << courses[i];
+    }
+    cout << setw(27) << "'Student Average'" << endl;
+    for (int j = 0; j < num_students_par; j++) {
+        cout << setw(10) << students[j];
+        for (int k = 0; k < NUM_COURSES; k++) {
+            cout << setw(15) << grades[j][k];
+
+        }
+        cout << setw(20) << std_avg_par[j];
+        cout << endl;
+    }
+    cout << "'Course Average' = ";
+    for (int l = 0; l < NUM_COURSES; l++) {
+        cout << setw(10) << grade_avg_par[l];
+
+    }
+    cout << endl;
 }
